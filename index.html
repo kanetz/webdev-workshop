@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>WebDev Workshop</title>
-    <script type="text/javascript" src="./javascript/lib/jquery-1.11.0.min.js"></script>
-    <script>
-        alert($('.to-do-item').size());
-        $(function() {
-            alert('Document is ready!');
-            alert($('.to-do-item').size());
-        });
-    </script>
 </head>
+
 <body>
+
 <style>
     #to-do-list {
         list-style: none;
@@ -27,10 +22,33 @@
         text-decoration: line-through;
     }
 </style>
+
 <ul id="to-do-list">
-    <li class="to-do-item">My Task 1</li>
-    <li class="to-do-item">My Task 2</li>
-    <li class="to-do-item finished">My Task 3</li>
+    <!--<li class="to-do-item">My Task 1</li>-->
+    <!--<li class="to-do-item">My Task 2</li>-->
+    <!--<li class="to-do-item finished">My Task 3</li>-->
 </ul>
+
+<script type="text/javascript" src="./javascript/lib/jquery-1.11.0.min.js"></script>
+<script>
+    var items = [
+        {name: 'My Task 1', finished: false},
+        {name: 'My Task 2', finished: false},
+        {name: 'My Task 3', finished: true},
+        {name: 'My Task 4', finished: true}
+    ];
+    $(function() {
+        items.forEach(function(item) {
+            var newItemElem = $('<li class="to-do-item"></li>');
+            newItemElem.text(item.name);
+            if(item.finished) {
+                newItemElem.addClass('finished');
+            }
+            newItemElem.appendTo($('#to-do-list'));
+        });
+    });
+</script>
+
 </body>
+
 </html>
