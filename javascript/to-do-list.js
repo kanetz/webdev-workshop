@@ -12,6 +12,11 @@ $(function() {
             items.push({name: name, finished: false});
             renderToDoList(items);
         });
+
+        $('#archive-to-do-item').click(function archiveToDoItem() {
+            items = items.filter(function(item) { return !item.finished; });
+            renderToDoList(items);
+        });
     });
 
 
@@ -31,7 +36,7 @@ $(function() {
         });
         if(item.finished) {
             newItemElem.addClass('finished');
-            itemCheckElem.attr('disabled', true);
+            itemCheckElem.attr('checked', true).attr('disabled', true);
         }
         newItemElem.appendTo($list);
     }
