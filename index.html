@@ -2,6 +2,14 @@
 <html>
 <head>
     <title>WebDev Workshop</title>
+    <script type="text/javascript" src="./javascript/lib/jquery-1.11.0.min.js"></script>
+    <script>
+        alert($('.to-do-item').size());
+        $(function() {
+            alert('Document is ready!');
+            alert($('.to-do-item').size());
+        });
+    </script>
 </head>
 <body>
 <style>
