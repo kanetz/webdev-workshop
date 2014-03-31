@@ -2,12 +2,12 @@ $(function() {
     var items = [],
         $list = $('#to-do-list');
 
-    $.getJSON('javascript/data.json', function(data) {
+    $.getJSON('javascript/data.json', function init(data) {
         items = data;
 
         renderToDoList(items);
 
-        $('#add-new-to-do-item').click(function() {
+        $('#add-new-to-do-item').click(function addNewToDoItem() {
             var name = $('#new-to-do-item-name').val();
             items.push({name: name, finished: false});
             renderToDoList(items);
@@ -16,14 +16,23 @@ $(function() {
 
 
     function renderToDoList(items) {
-        $list.html('');
-        items.forEach(function(item) {
-            var newItemElem = $('<li class="to-do-item"></li>');
-            newItemElem.text(item.name);
-            if(item.finished) {
-                newItemElem.addClass('finished');
-            }
-            newItemElem.appendTo($list);
+        $list.empty();
+        items.forEach(appendNewToDoItemElem);
+    }
+
+    function appendNewToDoItemElem(item) {
+        var newItemElem = $('<li class="to-do-item"><label><input type="checkbox" class="to-do-item-check" /><span class="to-do-item-name"></span></label></li>'),
+            itemNameElem = newItemElem.find('.to-do-item-name'),
+            itemCheckElem = newItemElem.find('.to-do-item-check');
+        itemNameElem.text(item.name);
+        itemCheckElem.click(function finishItem() {
+            item.finished = true;
+            renderToDoList(items);
         });
+        if(item.finished) {
+            newItemElem.addClass('finished');
+            itemCheckElem.attr('disabled', true);
+        }
+        newItemElem.appendTo($list);
     }
 });
